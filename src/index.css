@@ -32,6 +32,17 @@ html {
   font-family: var(--font-body);
 }
 
+html.custom-cursor-on,
+html.custom-cursor-on * {
+  cursor: none !important;
+}
+
+html.custom-cursor-on input,
+html.custom-cursor-on textarea,
+html.custom-cursor-on select {
+  cursor: text !important;
+}
+
 /* Base custom font helpers */
 .font-display {
   font-family: 'Anton', sans-serif;
@@ -96,6 +107,11 @@ html {
 /* Outline text styling */
 .text-outline-cream {
   -webkit-text-stroke: 1.5px rgba(246, 238, 225, 0.85);
+  color: transparent;
+}
+
+.text-outline-dark {
+  -webkit-text-stroke: 1.5px rgba(10, 10, 10, 0.28);
   color: transparent;
 }
 

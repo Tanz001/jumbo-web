@@ -83,7 +83,7 @@ export const MarqueeStrip: React.FC = () => {
   );
 
   return (
-    <div className="relative z-30 py-6 overflow-hidden bg-[#0A0A0A] select-none pointer-events-none">
+    <div className="relative z-30 py-6 overflow-hidden bg-[#F6EEE1] select-none pointer-events-none">
       <div className="-rotate-2 scale-105 bg-[#E01B24] py-4 sm:py-5 shadow-2xl border-y border-[#F2B441]/30">
         <div ref={marqueeInnerRef} className="flex gap-6 w-max">
           {marqueeItem}

@@ -1,8 +1,13 @@
 /**
  * JUMBO Image Asset Registry
- * Central export of all photo assets.
- * Replace URLs with production photography as needed.
+ * Local brand photos + curated Unsplash fallbacks.
  */
+
+import event1 from './event1.png';
+import event2 from './event2.png';
+import broastTray from './borast1 (1).jpeg';
+import broastCombo from './brast2.jpeg';
+import jumboMascot from './chicken.jpeg';
 
 export interface ImageSlot {
   url: string;
@@ -12,11 +17,43 @@ export interface ImageSlot {
 }
 
 export const IMAGES = {
-  // Hero section - golden broast pieces, dark moody atmospheric lighting
+  // Local brand photography
+  eventLaunch: {
+    url: event1,
+    alt: 'Jumbo Model Town grand launch — 24 September 2026',
+    width: 1200,
+    height: 1600,
+  },
+  eventCelebration: {
+    url: event2,
+    alt: 'Jumbo team celebrating with the signature launch cake',
+    width: 1600,
+    height: 1200,
+  },
+  broastPlatter: {
+    url: broastTray,
+    alt: 'Jumbo crispy broast platter with fries, bun, and garlic dip',
+    width: 1600,
+    height: 1200,
+  },
+  broastCombo: {
+    url: broastCombo,
+    alt: 'Jumbo broast meal tray with fries, sesame bun, and red drink',
+    width: 1600,
+    height: 1200,
+  },
+  mascot: {
+    url: jumboMascot,
+    alt: 'Jumbo rooster mascot',
+    width: 1200,
+    height: 1200,
+  },
+
+  // Hero — real Jumbo broast tray
   hero: {
-    url: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=1800&q=80',
+    url: broastTray,
     alt: 'Jumbo Signature Crispy Injected Broast Chicken',
-    width: 1800,
+    width: 1600,
     height: 1200,
   },
   // Macro crust close-up in Story section
@@ -28,10 +65,10 @@ export const IMAGES = {
   },
   // Crispy pieces spread
   broastPieces: {
-    url: 'https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=1800&q=80',
+    url: broastCombo,
     alt: 'Golden fried chicken broast portions with seasoning',
     width: 1600,
-    height: 1067,
+    height: 1200,
   },
   // Signature Process 01: Marinate
   marinate: {
@@ -49,10 +86,10 @@ export const IMAGES = {
   },
   // Signature Process 03: Pressure Broast / Crisp
   crisp: {
-    url: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=1800&q=80',
+    url: broastTray,
     alt: 'Pressure cooked to golden shatteringly crispy perfection',
     width: 1600,
-    height: 1067,
+    height: 1200,
   },
   // Burger feature split
   burgerHero: {
@@ -81,12 +118,12 @@ export const IMAGES = {
     width: 1600,
     height: 1067,
   },
-  // Masonry gallery slots 1 to 6
+  // Masonry gallery slots
   gallery1: {
-    url: 'https://images.unsplash.com/photo-1527477265147-19a9d7eb0b1f?auto=format&fit=crop&w=1800&q=80',
+    url: broastTray,
     alt: 'Jumbo kitchen craft and fiery culinary mastery',
-    width: 1200,
-    height: 1600,
+    width: 1600,
+    height: 1200,
   },
   gallery2: {
     url: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1800&q=80',
@@ -95,10 +132,10 @@ export const IMAGES = {
     height: 1067,
   },
   gallery3: {
-    url: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=1800&q=80',
+    url: broastCombo,
     alt: 'Freshly fried chicken portions in warm glow',
-    width: 1400,
-    height: 1400,
+    width: 1600,
+    height: 1200,
   },
   gallery4: {
     url: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1800&q=80',
@@ -113,17 +150,17 @@ export const IMAGES = {
     height: 1600,
   },
   gallery6: {
-    url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1800&q=80',
-    alt: 'Grand feast table spread at Jumbo',
+    url: event2,
+    alt: 'Jumbo team and store celebration',
     width: 1600,
-    height: 1067,
+    height: 1200,
   },
   // Store front
   storeFront: {
-    url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80',
-    alt: 'Jumbo flagship store exterior with fiery warm illumination',
-    width: 1800,
-    height: 1200,
+    url: event1,
+    alt: 'Jumbo Model Town flagship store grand launch',
+    width: 1200,
+    height: 1600,
   },
 };
 

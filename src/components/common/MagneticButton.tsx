@@ -3,7 +3,7 @@ import gsap from 'gsap';
 
 interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: 'primary' | 'outline' | 'ghost' | 'cream';
+  variant?: 'primary' | 'outline' | 'outlineDark' | 'ghost' | 'cream';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -101,6 +101,8 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       'bg-[#E01B24] text-[#F6EEE1] border border-[#E01B24] shadow-lg shadow-[#E01B24]/20 hover:shadow-[#E01B24]/40',
     outline:
       'bg-transparent text-[#F6EEE1] border border-[#F6EEE1]/40 hover:border-[#E01B24] hover:text-[#F6EEE1]',
+    outlineDark:
+      'bg-transparent text-[#0A0A0A] border border-[#0A0A0A]/35 hover:border-[#E01B24] hover:text-[#E01B24]',
     ghost:
       'bg-transparent text-[#F6EEE1] hover:text-[#FF5A1F]',
     cream:
@@ -110,6 +112,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   const circleFills = {
     primary: 'bg-[#FF5A1F]',
     outline: 'bg-[#E01B24]',
+    outlineDark: 'bg-[#E01B24]',
     ghost: 'bg-[#E01B24]/20',
     cream: 'bg-[#E01B24]',
   };

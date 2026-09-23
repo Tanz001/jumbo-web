@@ -111,11 +111,11 @@ export const GallerySection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full bg-[#0A0A0A] text-[#F6EEE1] py-24 px-6 sm:px-12 select-none overflow-hidden"
+      className="relative min-h-screen w-full bg-[#F6EEE1] text-[#0A0A0A] py-24 px-6 sm:px-12 select-none overflow-hidden"
     >
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#F6EEE1]/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#0A0A0A]/10">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <span className="w-8 h-[2px] bg-[#E01B24]" />
@@ -123,8 +123,8 @@ export const GallerySection: React.FC = () => {
                 THE ATMOSPHERE & CRAFT
               </span>
             </div>
-            <h2 className="font-display text-5xl sm:text-7xl uppercase tracking-tight text-[#F6EEE1]">
-              FIERY <span className="font-accent lowercase italic text-[#F2B441]">moments</span>
+            <h2 className="font-display text-5xl sm:text-7xl uppercase tracking-tight text-[#0A0A0A]">
+              FIERY <span className="font-accent lowercase italic text-[#E01B24]">moments</span>
             </h2>
           </div>
           <span className="font-display uppercase text-xs tracking-widest text-[#8C857C]">
@@ -138,7 +138,7 @@ export const GallerySection: React.FC = () => {
             <div
               key={idx}
               onClick={() => setActivePhoto({ src: item.slot.url, alt: item.slot.alt })}
-              className={`gallery-tile relative rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-[#F6EEE1]/10 group ${item.className}`}
+              className={`gallery-tile relative rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-[#0A0A0A]/10 group ${item.className}`}
               data-cursor="view"
             >
               <div className="gallery-inner-img w-full h-[120%] -mt-[10%]">
@@ -159,7 +159,7 @@ export const GallerySection: React.FC = () => {
         <div className="py-6 overflow-hidden pointer-events-none select-none">
           <div
             ref={marqueeTextRef}
-            className="whitespace-nowrap font-display text-6xl sm:text-8xl md:text-9xl text-outline-cream uppercase tracking-tight flex gap-8"
+            className="whitespace-nowrap font-display text-6xl sm:text-8xl md:text-9xl text-outline-dark uppercase tracking-tight flex gap-8"
           >
             <span>CRISPY • JUICY • GOLDEN • INJECTED • BROASTED • </span>
             <span>CRISPY • JUICY • GOLDEN • INJECTED • BROASTED • </span>
@@ -172,7 +172,7 @@ export const GallerySection: React.FC = () => {
             <div
               key={idx + 2}
               onClick={() => setActivePhoto({ src: item.slot.url, alt: item.slot.alt })}
-              className={`gallery-tile relative rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-[#F6EEE1]/10 group ${item.className}`}
+              className={`gallery-tile relative rounded-3xl overflow-hidden cursor-pointer shadow-2xl border border-[#0A0A0A]/10 group ${item.className}`}
               data-cursor="view"
             >
               <div className="gallery-inner-img w-full h-[120%] -mt-[10%]">

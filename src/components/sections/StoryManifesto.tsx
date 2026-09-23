@@ -142,7 +142,7 @@ export const StoryManifesto: React.FC = () => {
     <section
       id="story"
       ref={sectionRef}
-      className="relative min-h-screen w-full bg-[#0A0A0A] text-[#F6EEE1] flex flex-col justify-center py-20 px-6 sm:px-12 overflow-hidden"
+      className="relative min-h-screen w-full bg-[#F6EEE1] text-[#0A0A0A] flex flex-col justify-center py-20 px-6 sm:px-12 overflow-hidden"
     >
       <div
         ref={containerRef}
@@ -159,7 +159,7 @@ export const StoryManifesto: React.FC = () => {
 
           {/* Large Paragraph in Fraunces */}
           <div id="manifesto-text-container">
-            <p className="font-accent text-3xl sm:text-4xl md:text-5xl leading-[1.3] text-[#F6EEE1] font-normal select-none">
+            <p className="font-accent text-3xl sm:text-4xl md:text-5xl leading-[1.3] text-[#0A0A0A] font-normal select-none">
               <SplitWords
                 text={manifestoText}
                 wordClassName="manifesto-word"
@@ -171,7 +171,7 @@ export const StoryManifesto: React.FC = () => {
           {/* Stat Blocks */}
           <div
             id="manifesto-stats"
-            className="grid grid-cols-3 gap-4 pt-6 border-t border-[#F6EEE1]/10"
+            className="grid grid-cols-3 gap-4 pt-6 border-t border-[#0A0A0A]/10"
           >
             <div>
               <div className="font-display text-4xl sm:text-5xl md:text-6xl text-[#E01B24] tracking-tight">
@@ -192,7 +192,7 @@ export const StoryManifesto: React.FC = () => {
             </div>
 
             <div>
-              <div className="font-display text-4xl sm:text-5xl md:text-6xl text-[#F6EEE1] tracking-tight">
+              <div className="font-display text-4xl sm:text-5xl md:text-6xl text-[#0A0A0A] tracking-tight">
                 {stats.plates}+
               </div>
               <p className="text-xs uppercase font-body tracking-wider text-[#8C857C] mt-1 font-medium">
@@ -206,7 +206,7 @@ export const StoryManifesto: React.FC = () => {
         <div className="lg:col-span-5 relative">
           <div
             ref={imageWrapperRef}
-            className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border border-[#F6EEE1]/10 bg-[#161413]"
+            className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border border-[#0A0A0A]/10 bg-white"
             style={{ clipPath: 'inset(100% 0% 0% 0%)' }}
           >
             <div ref={imageInnerRef} className="w-full h-[120%] -mt-[10%]">
@@ -231,7 +231,7 @@ export const StoryManifesto: React.FC = () => {
       </div>
 
       {/* Crispy edge section divider */}
-      <CrispyEdge color="#161413" className="absolute bottom-0 left-0 right-0" />
+      <CrispyEdge color="#0A0A0A" className="absolute bottom-0 left-0 right-0" />
     </section>
   );
 };

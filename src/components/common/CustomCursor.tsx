@@ -4,25 +4,30 @@ import gsap from 'gsap';
 export const CustomCursor: React.FC = () => {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState(false);
   const [cursorState, setCursorState] = useState<'default' | 'view' | 'button' | 'hidden'>('default');
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
+  // Enable only on fine pointers (desktop)
   useEffect(() => {
-    // Detect touch device
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      setIsTouchDevice(true);
-      return;
-    }
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    setEnabled(true);
+    document.documentElement.classList.add('custom-cursor-on');
+    return () => document.documentElement.classList.remove('custom-cursor-on');
+  }, []);
 
+  // Attach tracking after cursor nodes mount
+  useEffect(() => {
+    if (!enabled) return;
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    // QuickTo for high performance 60fps tracking
+    gsap.set([dot, ring], { x: -100, y: -100 });
+
     const xToDot = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power2.out' });
     const yToDot = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power2.out' });
-    const xToRing = gsap.quickTo(ring, 'x', { duration: 0.5, ease: 'power3.out' });
-    const yToRing = gsap.quickTo(ring, 'y', { duration: 0.5, ease: 'power3.out' });
+    const xToRing = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3.out' });
+    const yToRing = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3.out' });
 
     const handleMouseMove = (e: MouseEvent) => {
       xToDot(e.clientX);
@@ -30,66 +35,60 @@ export const CustomCursor: React.FC = () => {
       xToRing(e.clientX);
       yToRing(e.clientY);
 
-      // Check hovered target
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const viewTarget = target.closest('[data-cursor="view"]');
-      const buttonTarget = target.closest('button, a, [data-cursor="button"], input, select');
-
-      if (viewTarget) {
+      if (target.closest('[data-cursor="view"]')) {
         setCursorState('view');
-      } else if (buttonTarget) {
+      } else if (target.closest('button, a, [data-cursor="button"], input, select, label')) {
         setCursorState('button');
       } else {
         setCursorState('default');
       }
     };
 
-    const handleMouseLeave = () => {
-      setCursorState('hidden');
-    };
+    const handleLeave = () => setCursorState('hidden');
+    const handleEnter = () => setCursorState('default');
 
-    const handleMouseEnter = () => {
-      setCursorState('default');
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', handleLeave);
+    document.documentElement.addEventListener('mouseenter', handleEnter);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.documentElement.removeEventListener('mouseleave', handleLeave);
+      document.documentElement.removeEventListener('mouseenter', handleEnter);
     };
-  }, []);
+  }, [enabled]);
 
-  if (isTouchDevice || cursorState === 'hidden') return null;
+  if (!enabled) return null;
+
+  const visible = cursorState !== 'hidden';
 
   return (
     <>
-      {/* 12px Cream Dot */}
       <div
         ref={dotRef}
-        className={`fixed top-0 left-0 -ml-[6px] -mt-[6px] w-3 h-3 rounded-full bg-[#F6EEE1] pointer-events-none z-[9999] transition-opacity duration-300 mix-blend-difference ${
-          cursorState === 'view' ? 'opacity-0' : 'opacity-100'
+        aria-hidden
+        className={`fixed top-0 left-0 z-[99999] h-3 w-3 -ml-1.5 -mt-1.5 rounded-full bg-[#E01B24] pointer-events-none transition-opacity duration-200 ${
+          visible && cursorState !== 'view' ? 'opacity-100' : 'opacity-0'
         }`}
       />
-
-      {/* 44px Lagging Ring */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 flex items-center justify-center pointer-events-none z-[9998] transition-all duration-300 rounded-full ${
-          cursorState === 'view'
-            ? 'w-[90px] h-[90px] -ml-[45px] -mt-[45px] bg-[#E01B24] text-[#F6EEE1] border border-[#F2B441]/40 shadow-2xl scale-100'
-            : cursorState === 'button'
-            ? 'w-[54px] h-[54px] -ml-[27px] -mt-[27px] bg-[#E01B24]/80 border border-[#E01B24] backdrop-blur-[1px] scale-110'
-            : 'w-11 h-11 -ml-[22px] -mt-[22px] border border-[#F6EEE1]/50 bg-transparent'
+        aria-hidden
+        className={`fixed top-0 left-0 z-[99998] flex items-center justify-center rounded-full pointer-events-none transition-[width,height,background-color,border-color,opacity,margin] duration-200 ${
+          !visible
+            ? 'h-11 w-11 -ml-[22px] -mt-[22px] opacity-0 border border-[#E01B24]/40'
+            : cursorState === 'view'
+              ? 'h-[88px] w-[88px] -ml-11 -mt-11 bg-[#E01B24] text-[#F6EEE1] border-2 border-[#F2B441] opacity-100'
+              : cursorState === 'button'
+                ? 'h-14 w-14 -ml-7 -mt-7 border-2 border-[#E01B24] bg-[#E01B24]/15 opacity-100'
+                : 'h-11 w-11 -ml-[22px] -mt-[22px] border-2 border-[#E01B24]/55 bg-transparent opacity-100'
         }`}
       >
         {cursorState === 'view' && (
-          <span className="font-display uppercase tracking-widest text-xs font-bold select-none animate-in fade-in zoom-in-75 duration-200">
+          <span className="select-none font-display text-xs font-bold uppercase tracking-widest">
             VIEW
           </span>
         )}
