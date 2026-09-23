@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-jumbo-red: #E01B24;
+  --color-ember: #FF5A1F;
+  --color-gold: #F2B441;
+  --color-oxblood: #4A0A10;
+  --color-ink: #0A0A0A;
+  --color-charcoal: #161413;
+  --color-cream: #F6EEE1;
+  --color-smoke: #8C857C;
+
+  --font-display: 'Anton', sans-serif;
+  --font-accent: 'Fraunces', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+:root {
+  --jumbo-red: #E01B24;
+  --ember: #FF5A1F;
+  --gold: #F2B441;
+  --oxblood: #4A0A10;
+  --ink: #0A0A0A;
+  --charcoal: #161413;
+  --cream: #F6EEE1;
+  --smoke: #8C857C;
+}
+
+html {
+  background-color: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-body);
+}
+
+/* Base custom font helpers */
+.font-display {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
+
+.font-accent {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+}
+
+.font-body {
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Warm color grading for food imagery */
+.food-grade {
+  filter: contrast(1.05) saturate(1.1);
+}
+
+/* Hide native scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2624;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E01B24;
+}
+
+/* Custom selection styling */
+::selection {
+  background-color: #E01B24;
+  color: #F6EEE1;
+}
+
+/* Hardware accelerated layer */
+.gpu-accel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Subtle text glow */
+.text-glow-ember {
+  text-shadow: 0 0 30px rgba(255, 90, 31, 0.45);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 40px rgba(224, 27, 36, 0.5);
+}
+
+/* Outline text styling */
+.text-outline-cream {
+  -webkit-text-stroke: 1.5px rgba(246, 238, 225, 0.85);
+  color: transparent;
+}
+
+.text-outline-red {
+  -webkit-text-stroke: 1.5px rgba(224, 27, 36, 0.9);
+  color: transparent;
+}
+
+.text-outline-faint {
+  -webkit-text-stroke: 1px rgba(246, 238, 225, 0.2);
+  color: transparent;
+}
