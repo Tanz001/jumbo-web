@@ -59,6 +59,14 @@ html.custom-cursor-on select {
   font-family: 'DM Sans', sans-serif;
 }
 
+/* UI labels / buttons — readable at small sizes (Anton is display-only) */
+.font-ui {
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
 /* Warm color grading for food imagery */
 .food-grade {
   filter: contrast(1.05) saturate(1.1);

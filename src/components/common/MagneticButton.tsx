@@ -24,14 +24,12 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     const btn = btnRef.current;
     if (!btn) return;
 
-    // Check touch devices
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const rect = btn.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    // Pull up to 0.3 of the cursor offset
     gsap.to(btn, {
       x: x * 0.3,
       y: y * 0.3,
@@ -98,15 +96,14 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-[#E01B24] text-[#F6EEE1] border border-[#E01B24] shadow-lg shadow-[#E01B24]/20 hover:shadow-[#E01B24]/40',
+      'bg-[#E01B24] text-white border border-[#E01B24] shadow-lg shadow-[#E01B24]/20 hover:shadow-[#E01B24]/40',
     outline:
-      'bg-transparent text-[#F6EEE1] border border-[#F6EEE1]/40 hover:border-[#E01B24] hover:text-[#F6EEE1]',
+      'bg-transparent text-[#F6EEE1] border border-[#F6EEE1]/50 hover:border-[#E01B24] hover:text-white',
     outlineDark:
-      'bg-transparent text-[#0A0A0A] border border-[#0A0A0A]/35 hover:border-[#E01B24] hover:text-[#E01B24]',
-    ghost:
-      'bg-transparent text-[#F6EEE1] hover:text-[#FF5A1F]',
+      'bg-transparent text-[#0A0A0A] border border-[#0A0A0A]/30 hover:border-[#E01B24] hover:text-[#E01B24]',
+    ghost: 'bg-transparent text-[#F6EEE1] hover:text-[#FF5A1F]',
     cream:
-      'bg-[#F6EEE1] text-[#0A0A0A] border border-[#F6EEE1] hover:bg-[#E01B24] hover:text-[#F6EEE1] hover:border-[#E01B24]',
+      'bg-[#F6EEE1] text-[#0A0A0A] border border-[#F6EEE1] hover:bg-[#E01B24] hover:text-white hover:border-[#E01B24]',
   };
 
   const circleFills = {
@@ -117,10 +114,11 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     cream: 'bg-[#E01B24]',
   };
 
+  // DM Sans + normal line-height — Anton was unreadable on small buttons
   const sizeStyles = {
-    sm: 'px-4 py-2 text-xs font-bold uppercase tracking-wider',
-    md: 'px-7 py-3.5 text-sm font-bold uppercase tracking-wider',
-    lg: 'px-9 py-4.5 text-base font-bold uppercase tracking-widest',
+    sm: 'px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.08em]',
+    md: 'px-7 py-3.5 text-[13px] font-semibold uppercase tracking-[0.08em]',
+    lg: 'px-9 py-4 text-[14px] font-semibold uppercase tracking-[0.1em]',
   };
 
   return (
@@ -130,18 +128,16 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`relative inline-flex items-center justify-center rounded-full overflow-hidden transition-colors cursor-pointer select-none font-display ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      className={`relative inline-flex items-center justify-center rounded-full overflow-hidden transition-colors cursor-pointer select-none font-ui leading-none ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
       {...props}
     >
-      {/* Inner expanding circle */}
       <span
         ref={circleRef}
         aria-hidden="true"
         className={`absolute -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full pointer-events-none ${circleFills[variant]}`}
       />
 
-      {/* Button content */}
-      <span className="relative z-10 flex items-center gap-2">
+      <span className="relative z-10 flex items-center gap-2 whitespace-nowrap">
         {children}
       </span>
     </button>

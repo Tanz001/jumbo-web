@@ -24,6 +24,8 @@ export const MenuShowcase: React.FC<MenuShowcaseProps> = ({
   const floatingPreviewRef = useRef<HTMLDivElement>(null);
 
   const currentItems = MENU_PRODUCTS.filter((p) => p.category === activeCategory);
+  const activeLabel =
+    MENU_CATEGORIES.find((c) => c.key === activeCategory)?.label ?? 'Menu';
 
   const handleCategoryChange = (cat: MenuCategory) => {
     if (cat === activeCategory) return;
@@ -105,36 +107,32 @@ export const MenuShowcase: React.FC<MenuShowcaseProps> = ({
         )}
       </div>
 
-      <div className="mx-auto max-w-7xl space-y-10">
-        {/* Heading — fixed brand title, not category name */}
-        <div className="text-center max-w-2xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-3">
-            <span className="h-[2px] w-6 bg-[#E01B24]" />
-            <span className="font-display text-[11px] uppercase tracking-[0.28em] text-[#E01B24]">
-              Culinary Selection
-            </span>
-            <span className="h-[2px] w-6 bg-[#E01B24]" />
+      <div className="mx-auto max-w-7xl space-y-8">
+        {/* Header row */}
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between border-b border-[#0A0A0A]/10 pb-8">
+          <div className="max-w-xl">
+            <div className="mb-3 flex items-center gap-3">
+              <span className="h-[2px] w-7 bg-[#E01B24]" />
+              <span className="font-ui text-[11px] uppercase text-[#E01B24]">
+                Culinary Selection · {MENU_PRODUCTS.length} items
+              </span>
+            </div>
+            <h2 className="font-display text-5xl sm:text-6xl md:text-7xl uppercase tracking-tight leading-[0.88] text-[#0A0A0A]">
+              Our{' '}
+              <span className="font-accent lowercase italic text-[#E01B24]">Menu</span>
+            </h2>
+            <p className="mt-3 font-body text-sm sm:text-base text-[#5C564E] leading-relaxed">
+              Injected broast, burgers, wings & more — made fresh, never held under lamps.
+            </p>
           </div>
 
-          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl uppercase tracking-tight leading-[0.88] text-[#0A0A0A]">
-            Our{' '}
-            <span className="font-accent lowercase italic text-[#E01B24]">Menu</span>
-          </h2>
-
-          <p className="font-body text-sm sm:text-base text-[#5C564E] leading-relaxed">
-            Injected broast, burgers, wings & more — fresh off the broaster.
-          </p>
-        </div>
-
-        {/* Compact category toggle */}
-        <div className="flex justify-center">
+          {/* Compact category toggles */}
           <div
             role="tablist"
             aria-label="Menu categories"
-            className="inline-flex max-w-full items-center gap-0.5 overflow-x-auto rounded-full border border-[#0A0A0A]/10 bg-white p-1 shadow-sm"
+            className="flex w-full max-w-xl flex-wrap gap-1.5 lg:justify-end"
           >
             {MENU_CATEGORIES.map((cat) => {
-              const count = MENU_PRODUCTS.filter((p) => p.category === cat.key).length;
               const active = activeCategory === cat.key;
               return (
                 <button
@@ -143,39 +141,30 @@ export const MenuShowcase: React.FC<MenuShowcaseProps> = ({
                   role="tab"
                   aria-selected={active}
                   onClick={() => handleCategoryChange(cat.key)}
-                  className={`shrink-0 rounded-full px-3.5 py-2 font-display text-[10px] uppercase tracking-[0.12em] transition-all cursor-pointer sm:px-4 sm:text-[11px] ${
+                  className={`rounded-full px-3.5 py-2 font-ui text-[11px] uppercase transition-all cursor-pointer ${
                     active
-                      ? 'bg-[#E01B24] text-white shadow-sm'
-                      : 'text-[#5C564E] hover:text-[#0A0A0A] hover:bg-[#F6EEE1]'
+                      ? 'bg-[#E01B24] text-white shadow-md shadow-[#E01B24]/25'
+                      : 'bg-white text-[#5C564E] border border-[#0A0A0A]/10 hover:border-[#E01B24]/40 hover:text-[#0A0A0A]'
                   }`}
                 >
                   {cat.label}
-                  <span
-                    className={`ml-1.5 tabular-nums ${
-                      active ? 'text-white/70' : 'text-[#8C857C]'
-                    }`}
-                  >
-                    {count}
-                  </span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Subtle active category label */}
-        <p className="text-center font-display text-[11px] uppercase tracking-[0.2em] text-[#8C857C]">
-          Showing{' '}
-          <span className="text-[#E01B24]">
-            {MENU_CATEGORIES.find((c) => c.key === activeCategory)?.label}
-          </span>
-          {' · '}
-          {currentItems.length} items
-        </p>
+        <div className="flex items-center justify-between gap-4">
+          <p className="font-ui text-[11px] uppercase text-[#8C857C]">
+            <span className="text-[#E01B24]">{activeLabel}</span>
+            <span className="mx-2 text-[#0A0A0A]/20">·</span>
+            {currentItems.length} items
+          </p>
+        </div>
 
         <div
           ref={cardsGridRef}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
           {currentItems.map((item) => (
             <button
@@ -185,19 +174,19 @@ export const MenuShowcase: React.FC<MenuShowcaseProps> = ({
               onMouseEnter={() => setHoveredItem(item)}
               onMouseLeave={() => setHoveredItem(null)}
               data-cursor="view"
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#0A0A0A]/08 bg-white text-left shadow-md transition-all duration-300 hover:border-[#E01B24]/40 hover:shadow-xl cursor-pointer"
+              className="group relative flex flex-col overflow-hidden rounded-[1.25rem] border border-[#0A0A0A]/08 bg-white text-left shadow-[0_8px_30px_rgba(10,10,10,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#E01B24]/35 hover:shadow-[0_16px_40px_rgba(224,27,36,0.12)] cursor-pointer"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#EDE4D6]">
+              <div className="relative aspect-[5/4] w-full overflow-hidden bg-[#EDE4D6]">
                 <img
                   src={item.image}
                   alt={item.alt}
                   loading="lazy"
                   className="h-full w-full object-cover food-grade transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/40 via-transparent to-transparent" />
                 {item.spiceBadge && (
-                  <div className="absolute left-3 top-3 rounded-full border border-[#F2B441]/35 bg-[#0A0A0A]/85 px-2.5 py-1 backdrop-blur-md">
-                    <span className="font-display text-[9px] uppercase tracking-wider text-[#F2B441]">
+                  <div className="absolute left-3 top-3 rounded-full bg-[#E01B24] px-2.5 py-1 shadow-md">
+                    <span className="font-ui text-[10px] uppercase text-white">
                       {item.spiceBadge}
                     </span>
                   </div>
@@ -205,21 +194,24 @@ export const MenuShowcase: React.FC<MenuShowcaseProps> = ({
               </div>
 
               <div className="flex flex-1 flex-col gap-2 p-5">
-                <p className="font-display text-[10px] uppercase tracking-widest text-[#E01B24] line-clamp-1">
+                <p className="font-ui text-[10px] uppercase text-[#E01B24] line-clamp-1">
                   {item.tagline}
                 </p>
-                <h3 className="font-display text-xl uppercase tracking-tight text-[#0A0A0A] transition-colors group-hover:text-[#E01B24] sm:text-2xl">
+                <h3 className="font-display text-xl uppercase tracking-tight leading-[0.95] text-[#0A0A0A] transition-colors group-hover:text-[#E01B24] sm:text-2xl">
                   {item.name}
                 </h3>
-                <p className="line-clamp-2 font-body text-xs leading-relaxed text-[#5C564E]">
+                <p className="line-clamp-2 font-body text-[13px] leading-relaxed text-[#5C564E]">
                   {item.desc}
                 </p>
 
-                <div className="mt-auto flex items-center justify-between border-t border-[#0A0A0A]/08 pt-3.5">
-                  <span className="font-display text-lg text-[#E01B24]">{item.priceLabel}</span>
+                <div className="mt-auto flex items-center justify-between border-t border-[#0A0A0A]/08 pt-4">
+                  <div>
+                    <p className="font-ui text-[9px] uppercase text-[#8C857C]">Price</p>
+                    <p className="font-ui text-base text-[#E01B24]">{item.priceLabel}</p>
+                  </div>
                   <span
                     aria-hidden
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E01B24] text-[#F6EEE1] shadow transition group-hover:rotate-90 group-hover:bg-[#FF5A1F]"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E01B24] text-white shadow-md transition duration-300 group-hover:rotate-90 group-hover:bg-[#FF5A1F]"
                   >
                     <Plus className="h-4 w-4" />
                   </span>

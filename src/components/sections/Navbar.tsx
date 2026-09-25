@@ -146,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, onOpenCart, cartCou
             <button
               key={link.label}
               onClick={() => handleLinkClick(link.href)}
-              className="px-3.5 xl:px-4 py-2 rounded-full text-[11px] xl:text-xs uppercase font-display tracking-[0.14em] text-[#0A0A0A]/75 hover:text-[#E01B24] hover:bg-white/70 transition-colors relative cursor-pointer"
+              className="px-3.5 xl:px-4 py-2 rounded-full text-[12px] uppercase font-ui text-[#0A0A0A]/75 hover:text-[#E01B24] hover:bg-white/70 transition-colors relative cursor-pointer"
             >
               {link.label}
             </button>
@@ -158,12 +158,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, onOpenCart, cartCou
             type="button"
             onClick={onOpenCart}
             aria-label={`View cart, ${cartCount} items`}
-            className="relative hidden sm:inline-flex items-center gap-2 rounded-full border border-[#0A0A0A]/12 bg-[#F6EEE1] px-4 py-2.5 font-display text-[11px] uppercase tracking-[0.14em] text-[#0A0A0A] shadow-md hover:border-[#E01B24] hover:text-[#E01B24] transition-colors cursor-pointer"
+            className="relative hidden sm:inline-flex items-center gap-2 rounded-full border border-[#0A0A0A]/12 bg-[#F6EEE1] px-4 py-2.5 font-ui text-[12px] uppercase text-[#0A0A0A] shadow-md hover:border-[#E01B24] hover:text-[#E01B24] transition-colors cursor-pointer"
           >
             <ShoppingBag className="h-4 w-4" />
             <span>View Cart</span>
             {cartCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#E01B24] px-1 font-display text-[10px] text-white">
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#E01B24] px-1 font-ui text-[10px] text-white">
                 {cartCount > 9 ? '9+' : cartCount}
               </span>
             )}
@@ -187,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrder, onOpenCart, cartCou
           >
             <ShoppingBag className="w-5 h-5" />
             {cartCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#E01B24] px-1 font-display text-[10px] text-white">
+              <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#E01B24] px-1 font-ui text-[10px] text-white">
                 {cartCount > 9 ? '9+' : cartCount}
               </span>
             )}
